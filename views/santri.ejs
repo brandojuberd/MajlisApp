@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santri</title>
+</head>
+<body>
+    <h1>List Santri</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Parent</th>
+                <th>Birth Year</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(el => { %>
+                <tr>
+                    <td><%= el.name %></td>
+                    <td><%= el.parent %></td>
+                    <td><%= el. %></td>
+                    <td><%= el.name %></td>
+                    <td><%= el.name %></td>
+                    <td><%= el.name %></td>
+                    <td></td>
+                </tr>             
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,16 +1,14 @@
 const route = require("express").Router()
+const Controller = require('../controllers/santriController');
 
+route.get("/", Controller.show)
 
-route.get("/", function(req,res){
-  res.send("ini halaman santri dari routes")
-})
+route.get("/add", Controller.addForm)
+route.post("/add", Controller.addPost)
 
-route.get("/add", )
-route.post("/add" )
+route.get("/update/:id", Controller.updateForm)
+route.post("/update/:id", Controller.updatePost )
 
-route.get("/update/:id", )
-route.post("/update/:id" )
-
-route.get("/delete/:id", )
+route.get("/delete/:id", Controller.delete)
 
 module.exports = route;

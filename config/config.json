@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "super123",
+    "password": "postgres",
     "database": "MajlisApp",
     "host": "localhost",
     "dialect": "postgres"

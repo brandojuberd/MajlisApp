@@ -7,7 +7,7 @@ const authentication = require('../middlewares/authentication');
 
 
 route.get("/login", userController.formLogin)
-route.post("/login", userController.formLogin)
+route.post("/login", userController.login)
 
 
 route.get("/register", userController.formRegister) 

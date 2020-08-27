@@ -16,6 +16,7 @@ class userController {
             }
         })
         .then(data => {
+            console.log(data, ">>>>>>>>>>>>>>>>>>>>")
             if(data) {
                 let flag = bcrypt.compareSync(req.body.password, data.password)
                 if(flag) {

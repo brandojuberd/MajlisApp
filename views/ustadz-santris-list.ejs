@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+ 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Document</title>
+</head>
+<body>
+  <h1><%= ustadzName(ustadzSantrisData[0].Ustadz) %></h1>
+
+  <h2>Add Santri</h2>
+  <form action="/:UstadzId/santri-list/add">
+    <label for="SantriId">Santri Name</label>
+    <br>
+    <select name="SantriId" >
+      <option selected hidden>---SELECT---</option>
+      <%santrisData.forEach(function(el){ %>
+        <option value="<%=el.id%>"><%=el.name%></option>
+      <%})%>
+    </select>
+
+    <br>
+
+    <label for="result">Result</label>
+    <br>
+    <select name="result" id="">
+      <option value="baik">Baik</option>
+      <option value="cukup">Cukup</option>
+      <option value="kurang">Kurang</option>
+    </select>
+
+    <br>
+
+    <button type="submit" value="submit">Submit</button>
+  </form>
+
+
+  <br><br>
+  
+  <h2>Santri List</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Santri Name</th>
+        <th>Result</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%ustadzSantrisData.forEach(function(el){ %>
+
+        <tr>
+          <td><%= el.Santri.name %></td>
+          <td><%= el.result %></td>
+        </tr>
+
+      <%})%>
+    </tbody>
+  </table>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/css/stylesheet.css">
+  <title>Ustadz</title>
+</head>
+<body>
+  <%- include("./partials/navbar.ejs") %>
+  <button><a href="/ustadz/add">Add</a></button>
+  
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Name</th> 
+        <th>Gender</th>
+        <th>Skill</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Action</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% ustadzsData.forEach(function(el){ %>
+        <tr>
+          <td><%= ustadzName(el)%></td>
+          <td><%= el.gender%></td>
+          <td><%= el.skill %></td>
+          <td><%= el.phone_number %></td>
+          <td><%= el.email%></td>
+          
+          <td><button><a href="/ustadz/edit/<%=el.id%>">edit</a></button>
+          <button><a href="/ustadz/delete/<%=el.id%>">delete</a></button>
+          <button><a href="/ustadz/<%=el.id%>/santri-list%>">add santri</a></button></td>
+          
+        </tr>
+      <% }) %>
+    </tbody>
+
+  </table>
+</body>
+</html>

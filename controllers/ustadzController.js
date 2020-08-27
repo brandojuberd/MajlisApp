@@ -22,7 +22,7 @@ class UstadzController{
     Ustadz.findAll()
       .then(function(data){
         ustadzsData = data
-        res.render("ustadz-list.ejs", {ustadzsData, ustadzName})
+        res.render("ustadz-list.ejs", {ustadzsData, ustadzName, Ustadz})
       })
       .catch(function(err){
         res.send(err)

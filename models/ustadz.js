@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    static prefixName(data){
+      let result = `Ust. ${data}`
+      return result
+    }
+
     static associate(models) {
       // define association here
       this.belongsToMany(models.Santri, {through:models.UstadzSantri})
@@ -31,6 +36,20 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Ustadz',
+    hooks: {
+    
+      beforeCreate(data, options){
+        if(data.last_name === ""){
+          data.last_name = data.first_name
+        }
+      },
+      beforeUpdate(data, options){
+        if(data.last_name === ""){
+          data.last_name = data.first_name
+        }
+      }
+      
+    }
   });
   return Ustadz;
 };

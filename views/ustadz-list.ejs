@@ -25,7 +25,7 @@
     <tbody>
       <% ustadzsData.forEach(function(el){ %>
         <tr>
-          <td><%= ustadzName(el)%></td>
+          <td><%= Ustadz.prefixName(ustadzName(el))%></td>
           <td><%= el.gender%></td>
           <td><%= el.skill %></td>
           <td><%= el.phone_number %></td>

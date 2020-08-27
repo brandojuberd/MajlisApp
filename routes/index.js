@@ -17,7 +17,7 @@ route.post("/register",userController.register)
 route.use(authentication)
 
 route.get("/", function(req,res){
-  res.send("ini dari routes")
+  res.render("home.ejs")
 })
 
 route.get("/logout", userController.logout)

@@ -1,20 +1,20 @@
+const UstadzController = require("../controllers/ustadzController")
+
 const route = require("express").Router()
 
 
-route.get("/", function(req,res){
-  res.send("ini halaman ustadz dari routes")
-})
+route.get("/", UstadzController.showUstadzs)
 
-route.get("/add", )
-route.post("/add" )
+route.get("/add", UstadzController.showAddUstadzForm)
+route.post("/add", UstadzController.addUstadz)
 
-route.get("/update/:id", )
-route.post("/update/:id" )
+route.get("/edit/:id", UstadzController.showEditUstadzForm)
+route.post("/edit/:id", UstadzController.editUstadz)
 
-route.get("/delete/:id", )
+route.get("/delete/:id", UstadzController.deleteUstadz)
 
-route.get("/:UstadzId/santri-list")
-route.post("/:UstadzId/santri-list/:UstadzSantrisid")
+route.get("/:UstadzId/santri-list", UstadzController.showUstadzSantris)
+route.post("/:UstadzId/santri-list/add", UstadzController.addSantriToUstadz)
 
 
 

@@ -1,16 +1,26 @@
 const route = require("express").Router()
 const ustadz = require("./ustadz")
 const santri = require("./santri")
+const userController = require('../controllers/userController');
+const authentication = require('../middlewares/authentication');
+
+
+
+route.get("/login", userController.formLogin)
+route.post("/login", userController.formLogin)
+
+
+route.get("/register", userController.formRegister) 
+route.post("/register",userController.register)
+
+//middleware
+route.use(authentication)
 
 route.get("/", function(req,res){
   res.send("ini dari routes")
 })
 
-// route.get("/login" )
-
-// route.get("/register", function()) // menunjukkan halaman register
-// route.post("/register")  //Create user di database
-
+route.get("/logout", userController.logout)
 
 route.use("/ustadz", ustadz)
 route.use("/santri", santri)

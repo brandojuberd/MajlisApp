@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, STRING
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Ustadz extends Model {
@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsToMany(models.Santri, {through:models.UstadzSantri})
       this.hasMany(models.UstadzSantri)
+
     }
   };
   Ustadz.init({
@@ -20,7 +21,12 @@ module.exports = (sequelize, DataTypes) => {
     last_name: DataTypes.STRING,
     gender: DataTypes.STRING,
     skill: DataTypes.STRING,
-    phone_number: DataTypes.STRING,
+    phone_number: {
+      type: STRING,
+      validate:{
+        isNumeric: {msg: "Phone Number yang anda masukkan salah"}
+      }
+    },
     email: DataTypes.STRING
   }, {
     sequelize,

@@ -1,5 +1,19 @@
 const {Ustadz, UstadzSantri, Santri} = require("../models")
 const ustadzName = require("../helpers/ustadzName")
+const nodemailer = require("nodemailer");
+const transporter = nodemailer.createTransport({
+  host: 'smtp.ethereal.email',
+  port: 587,
+  auth: {
+      user: 'deion.schmeler84@ethereal.email',
+      pass: 'BzJY6fr7XZFbUKxDTr'
+  },
+  tls:{
+    rejectUnauthorized: false
+  }
+  
+});
+
 class UstadzController{
   static showUstadzs(req, res){
     let ustadzsData;
@@ -88,6 +102,7 @@ class UstadzController{
     let reqId = req.params.UstadzId
     let ustadzSantrisData;
     let santrisData;
+    let ustadzData;
     UstadzSantri.findAll({
       where:{UstadzId:reqId},
       include:[Ustadz, Santri]
@@ -100,7 +115,12 @@ class UstadzController{
       })
       .then(function(data){
         santrisData = data
-        res.render("ustadz-santris-list", {ustadzSantrisData, ustadzName, santrisData})
+        console.log(reqId);
+        return Ustadz.findByPk(reqId)
+      })
+      .then(function(data){
+        ustadzData = data;
+        res.render("ustadz-santris-list", {ustadzSantrisData, ustadzName, santrisData, ustadzData})
 
       })
   }
@@ -112,14 +132,53 @@ class UstadzController{
       SantriId: req.body.SantriId,
       UstadzId: ustadzId
     }
+    let mail;
+    let ustadzData;
+    let santriData;
     UstadzSantri.create(newData)
       .then(function(){
-        res.redirect(`/${ustadzId}/santri-list`)
+        return Ustadz.findByPk(ustadzId)
+      })
+      .then(function(data){
+        ustadzData = data
+
+        return Santri.findByPk(req.body.SantriId)
+      })
+      .then(function(data){
+        santriData = data;
+        mail = `
+          <h1>REPORT:</h1>
+          <p>Pengajar:</p>        
+          <p>Ust. ${ustadzName(ustadzData)}</p>        
+          <p>Murid:</p>        
+          <p>${santriData.name}</p>  
+          <p>Result:</p>  
+          <p>${req.body.result}</p>    
+          `
+        let mailOption = {
+          from: "deion.schmeler84@ethereal.email", // sender address
+          to: `${ustadzData.email}, ${santriData.email}`, // list of receivers
+          subject: "Report Majlis App", // Subject line
+          text: mail, // plain text body
+          html: mail// html body
+        }
+        transporter.sendMail(mailOption, function(error,info){
+          // console.log(mailOption);
+
+          if(error){
+            console.log(error);
+          }
+          
+          res.redirect(`/ustadz/${ustadzId}/santri-list`)
+          
+        });
+      
       })
       .catch(function(err){
         res.send(err)
       })
   }
+
 }
 
 module.exports = UstadzController;

@@ -9,10 +9,12 @@
   <title>Document</title>
 </head>
 <body>
-  <h1><%= ustadzName(ustadzSantrisData[0].Ustadz) %></h1>
+  <%- include("./partials/navbar.ejs") %>
+
+  <h1><%= ustadzName(ustadzData) %></h1>
 
   <h2>Add Santri</h2>
-  <form action="/:UstadzId/santri-list/add">
+  <form action="/ustadz/<%= ustadzData.id%>/santri-list/add" method="POST">
     <label for="SantriId">Santri Name</label>
     <br>
     <select name="SantriId" >
@@ -46,7 +48,6 @@
       <tr>
         <th>Santri Name</th>
         <th>Result</th>
-        <th>Action</th>
       </tr>
     </thead>
     <tbody>

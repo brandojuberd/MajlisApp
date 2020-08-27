@@ -3,7 +3,7 @@ const ustadz = require("./ustadz")
 const santri = require("./santri")
 
 route.get("/", function(req,res){
-  res.send("ini dari routes")
+  res.render("home.ejs")
 })
 
 // route.get("/login" )

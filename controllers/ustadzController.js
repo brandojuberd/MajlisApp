@@ -77,7 +77,7 @@ class UstadzController{
       "Fiqih",
       "Quran"
     ]
-    Ustadz.update(newData, {where:{id : editId}})
+    Ustadz.update(newData, {where:{id : editId},  individualHooks:true})
       .then(function(data){
         res.redirect("/ustadz")
       })

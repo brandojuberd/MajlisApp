@@ -4,7 +4,7 @@
   "description": "Pair-project phase-1 with Abdul",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && node app.js"
   },
   "repository": {
     "type": "git",

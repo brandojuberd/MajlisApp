@@ -77,9 +77,9 @@ class UstadzController{
       "Fiqih",
       "Quran"
     ]
-    Ustadz.update(newData, {where:{id : editId}})
+    Ustadz.update(newData, {where:{id : editId},  individualHooks:true})
       .then(function(data){
-        res.redirect("/ustadz", {error})
+        res.redirect("/ustadz")
       })
       .catch(function(err){
         error = err.errors[0].message
@@ -115,7 +115,7 @@ class UstadzController{
       })
       .then(function(data){
         santrisData = data
-        console.log(reqId);
+        
         return Ustadz.findByPk(reqId)
       })
       .then(function(data){
